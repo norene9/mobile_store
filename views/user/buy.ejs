@@ -89,15 +89,7 @@
 										  	  <div class="dropdown-button">           			
 						            			<select class="dropdown" data-settings='{"wrapperClass":"flat"}'>
 								            		<option value="null">Colour</option>         
-										            <option value="AX">Red</option>
-										            <option value="AF">Green</option>
-										            <option value="AL">Yellow</option>
-										            <option value="DZ">Pink</option>
-										            <option value="AS">White</option>
-										            <option value="AD">Blue</option>
-										            <option value="AO">Orange</option>
-										            <option value="AI">Silver</option>
-										            <option value="AQ">Black</option>
+										            
 											  </select>
 											</div>
 										  </div>
@@ -126,7 +118,7 @@
 							      			<div class="delivery">
 							      				<h4>Select Booking Date</h4>
 							      				<form>
-							      					<select class="date">
+							      					<select class="date" id="date">
 							      						<option>Date</option>
 							      						<option>1</option>
 							      						<option>2</option>
@@ -158,7 +150,7 @@
 							      						<option>29</option>
 							      						<option>30</option>
 							      					</select>
-							      					<select class="month">
+							      					<select class="month" id="month">
 							      						<option>Month</option>
 							      						<option>Jan</option>
 							      						<option>Feb</option>
@@ -173,7 +165,7 @@
 							      						<option>Nov</option>
 							      						<option>Dec</option>
 							      					</select>
-							      					<select class="Year">
+							      					<select class="Year" id="year">
 							      						<option>Year</option>
 							      						<option>2014</option>
 							      						<option>2013</option>
@@ -187,7 +179,7 @@
 							      			<div class="delivery">
 							      				<h4>Select Delivery Date</h4>
 							      				<form>
-							      					<select class="date">
+							      					<select class="date" id="delivry_date">
 							      						<option>Date</option>
 							      						<option>1</option>
 							      						<option>2</option>
@@ -219,7 +211,7 @@
 							      						<option>29</option>
 							      						<option>30</option>
 							      					</select>
-							      					<select class="month">
+							      					<select class="month" id="delivry_month">
 							      						<option>Month</option>
 							      						<option>Jan</option>
 							      						<option>Feb</option>
@@ -234,7 +226,7 @@
 							      						<option>Nov</option>
 							      						<option>Dec</option>
 							      					</select>
-							      					<select class="Year">
+							      					<select class="Year" id="delivery_year">
 							      						<option>Year</option>
 							      						<option>2014</option>
 							      						<option>2013</option>
@@ -248,7 +240,7 @@
 							      			<div class="clearfix"></div>
 							      			<div class="delivery-ad">
 							      				<h4>Write Address Below</h4>
-							      				<textarea placeholder="Address" required=""></textarea>
+							      				<textarea placeholder="Address" required="" id="adress"></textarea>
 							      			</div>
 							      			<div class="step-f step-e">
 												<input type="submit" value="STEP 3" aria-controls="tab_item-2" role="tab"/>
@@ -265,11 +257,11 @@
 							      			</div>
 							      			<div class="card cardy">
 							      				<p>Card Holder's Name</p>
-							      				<input type="text" placeholder="Name" required=""/>
+							      				<input type="text" placeholder="Name" required="" id="holder"/>
 							      			</div>
 							      			<div class="card cardy">
 							      				<p>Card number</p>
-							      				<input type="text" placeholder="Number" required=""/>
+							      				<input type="text" placeholder="Number" required="" />
 							      			</div>
 							      			<div class="clearfix"></div>
 							      			<div class="card cardy">

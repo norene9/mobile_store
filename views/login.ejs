@@ -2,6 +2,14 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+<script type="text/javascript">
+  var onloadCallback = function() {
+    grecaptcha.render('login', {
+      'sitekey' : '6Lcu0u4ZAAAAAFjeC9NDOb4qpSBSEiEIVf-BPpSr'
+    });
+  };
+</script>
+
 <!------ Include the above in your HEAD tag ---------->
 <style>
 html {
@@ -228,7 +236,8 @@ input[type=text]:placeholder {
     <!-- Login Form -->
     <form action="/login" method="POST">
       <input type="text" id="login" class="fadeIn second" name="username" placeholder="login">
-      <input type="text" id="password" class="fadeIn third" name="password" placeholder="password">
+      <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
+    
       <input type="submit" class="fadeIn fourth" >
     </form>
 

@@ -8,6 +8,7 @@ module.exports=(sequelize,type)=>{
         },
         mobile:type.STRING,
         prix:type.STRING,
+        quantitiy:type.INTEGER,
         filepath:type.STRING,
         
        
