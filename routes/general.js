@@ -1,6 +1,7 @@
 const multer=require('multer');
 const express=require('express');
 const router=express.Router();
+
 var bodyParser=require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 router.use(bodyParser.json())
@@ -14,6 +15,8 @@ const storage=multer.diskStorage({
         cb(null,Date.now() + path.extname(file.originalname));
     }
 })
+//call login route
+
 //Init upload
 //-----------upload resturant's images----------------//
 const upload=multer({
@@ -66,8 +69,8 @@ router.get('/login',async function(req,res,next){
      try{
          var password=req.body.password
          var email=req.body.email
-         var Nom=req.body.nom
-         var Prenom=req.body.prenom
+         var Nom=req.body.Nom
+         var Prenom=req.body.Prenom
          var adress=req.body.adress
          var phone=req.body.phone
         

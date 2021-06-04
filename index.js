@@ -1,13 +1,15 @@
 var express=require("express");
 var path=require("path");
 var session=require('express-session');
-const router = require("./routes/router");
 var sequelize=require('./sequlize')
 var app=express();
+var Passport=require('passport').Passport, passport=new Passport();
 app.use(express.static(__dirname+'/public'));
 app.use(express.static(__dirname+'/uploads'));
 var generalRouter=require('./routes/general')
-
+var authRoutes=require("./routes/auth")(passport)
+require("./routes/passport")(passport)
+app.use('/',authRoutes)
 var MySQlStore=require('express-mysql-session')(session);
 var options={
     host:'localhost',

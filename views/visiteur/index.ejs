@@ -43,11 +43,10 @@ jQuery(document).ready(function($) {
 			<div class="navigation">
 				<ul class="navig">
 					<li><a href="#">Home</a></li>
-					<li><a href="#save" class="scroll">save 25%</a></li>
 					<li><a href="#feture" class="scroll">features</a></li>
 					<li><a href="#review"  class="active scroll">REviews</a></li>
 					<li><a href="#review"  class="active scroll">Produits</a></li>
-					<li><a href="#buy" class="scroll">buy now</a></li>
+					<li><a href="login" >buy now</a></li>
 					<li><a href="file:///C:/Users/Warda/Desktop/Projet/tnfalloy-web/web/login.html" >Compte</a></li>
 				</ul>
 				<script>
@@ -70,31 +69,43 @@ jQuery(document).ready(function($) {
 	<!-- Save Starts Here -->
 	<div class="save" id="save">
 		<div class="container">
-			<div class="row save-row">
-				<div class="col-md-6 save-column">
-					<div class="save-grid">
-						<p>rrp<br>&pound;280</p>
-						<div class="y-sale">
-							<span>25% OFF!</span>
-							<h3>&pound;210</h3>
-							<small>We are Official Affiliates offering this exclusive deal to the UK only.</small>
-						</div>
+			<div class="reviews" id="review">
+				<div class="container">
+					<a href="#"><img src="images/logo_small.png" width="160px" height="50px" alt=""></a>
+				</br></br>
+					<div  id="top" class="callbacks_container">
+						  <ul class="rslides" id="slider4">
+							<% for(var i=0;i< mobiles.length;i++){%>
+								<% if (mobiles.length!==0){%>
+									
+									<li>
+								
+										<div class="slider-top">
+											<table>	
+											<td><a ><img src="<%=mobiles[i].filepath%>" width="100" height="100"></a></td>
+											<tr> 
+											
+											<td id="<%=i%>"><p><%=mobiles[i].mobile%></p></td>
+											</tr><tr>
+											<td><p class="rev"><%=mobiles[i].prix%></p></td>
+											<tr>
+											<td><a href="login"><button type="submit" class="contact" >Acheter</button></a></td>
+										</tr>
+											</tr>
+											</table>
+										</div>
+									</li>
+									
+								
+							<%}%>
+							<%}%>
+						
+						  </ul>
 					</div>
-				</div>
-				<div class="col-md-6 save-column">
-					<div class="save-sale">
-						<h2>Save a whopping 25% off The North Face Alloy Jacket.  <span> uk only deal!</span></h2>
-						<p>We've teamed up with 'The North Face' to offer you an incredible 25% off the Alloy Jacket - one of the latest and best jackets from the leading brand and perfect for Ski and Alpine lovers!<br> <span><strike> RRP &pound;280</strike>  Save 25%     Our price: £210</span></p>
-						<ul class="share-list">
-							<li>share:</li>
-							<li><i class="fa"></i></li>
-							<li><i class="fb"></i></li>
-							<li><i class="fc"></i></li>
-							<li><i class="fd"></i></li>
-						</ul>
-					</div>
+		
 				</div>
 			</div>
+			<!-- Reviews Ends Here -->
 		</div>
 	</div>
 	<!-- Save Ends Here -->
@@ -120,43 +131,7 @@ jQuery(document).ready(function($) {
 		
 		    });
 		  </script>
-	<div class="reviews" id="review">
-		<div class="container">
-			<a href="#"><img src="images/logo_small.png" width="160px" height="50px" alt=""></a>
-		</br></br>
-			<div  id="top" class="callbacks_container">
-			      <ul class="rslides" id="slider4">
-					<% for(var i=0;i< mobiles.length;i++){%>
-						<% if (mobiles.length!==0){%>
-							
-							<li>
-						
-								<div class="slider-top">
-									<table>	
-									<td><a ><img src="<%=mobiles[i].filepath%>" width="100" height="100"></a></td>
-									<tr> 
-									
-									<td id="<%=i%>"><p><%=mobiles[i].mobile%></p></td>
-									</tr><tr>
-									<td><p class="rev"><%=mobiles[i].prix%></p></td>
-									<tr>
-									<td><a href="login"><button type="submit" class="contact" >Acheter</button></a></td>
-								</tr>
-									</tr>
-									</table>
-								</div>
-							</li>
-							
-						
-					<%}%>
-					<%}%>
-				
-			      </ul>
-			</div>
-
-		</div>
-	</div>
-	<!-- Reviews Ends Here -->
+	
 	<script src="js/responsiveslides.min.js"></script>
 			 <script>
 			    // You can also use "$(window).load(function() {"
