@@ -13,23 +13,30 @@ module.exports = function (passport) {
          done(null,user);
      });
      passport.use(new localStrategy( async function (email,password,done) {
+       
      console.log(email)
      console.log(password)
       const user = await User.findOne({where: {
               email:email 
           }});
-          if (!bcrypt.compareSync(password, user.password)) {
-            console.log('incorrect pwd')
-            return done(null, false, { message: "Incorrect password" });
+          if(user!==null){
+            if (!bcrypt.compareSync(password, user.password)) {
+              console.log('incorrect pwd')
+              return done(null, false, { message: "Incorrect password" });
+            }
+          
+        else if(user) {
+           console.log(user)
+            done( null,user);
+           
+        } else {
+          console.log('not found')
+            done(null,false);
+        }
+          }else{
+            console.log('not found')
+            done(null,false);
           }
-        
-      else if(user) {
-         console.log(user)
-          done( null,user);
-         
-      } else {
-        console.log('not found')
-          done(null,false);
-      }
+          
      }));
 };

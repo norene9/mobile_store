@@ -383,5 +383,19 @@ router.post('/add_marque',async function(req,res,next){
     
       res.render('Admin/comands',{comand})
     })
+    router.get('/annuler',async function(req,res,next){
+ 
+    
+        var comand=await Command.Destroy({where:{id:req.body.id}})
+        
+          res.redirect('back')
+        })
+    router.get('/pannier',loggedin,async function(req,res,next){
+ 
+    
+        var comand=await Command.findAll({where:{UserId:req.user.id},include:[{model:Mobile},{model:User}]});
+        
+          res.render('pannier',{comand})
+        })
  
 module.exports=router;

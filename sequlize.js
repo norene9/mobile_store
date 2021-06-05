@@ -34,5 +34,5 @@ sequelize.sync({
     console.log("database a est ete crier")
 });
 module.exports={
-User,Admin,Command,Mobile,Marque,TypeUser
+User,Admin,Command,Mobile,Marque,TypeUser 
 }
