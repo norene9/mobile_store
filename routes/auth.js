@@ -7,8 +7,9 @@ var passport=require("./passport")
     module.exports = function (passport) {
         
         router.post('/login' , passport.authenticate('local',{
+            
                     failureRedirect :"/login",
-                                successRedirect :"/index",
+                                successRedirect :"/user",
                                         }));
                                             return router;
                                             }

@@ -6,6 +6,8 @@ module.exports=(sequelize,type)=>{
         autoIncrement:true,
         primaryKey:true},
         quantity:type.INTEGER,
+        booking:type.STRING,
+        Assurance:type.STRING
     
-    })
+    }) 
 }

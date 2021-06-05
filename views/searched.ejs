@@ -81,17 +81,24 @@ jQuery(document).ready(function($) {
 									<li>
 								
 										<div class="slider-top">
-											<table>	
+											<table>
+												
 											<td><a ><img src="<%=mobiles[i].filepath%>" width="100" height="100"></a></td>
 											<tr> 
 											
 											<td id="<%=i%>"><p><%=mobiles[i].mobile%></p></td>
-											</tr><tr>
+											</tr>
+											<tr>
+												<form action="buy"	method="POST">
+												<td><input class="rev" name="id" id="id" value="<%=mobiles[i].id%>"></td>
+												<tr>
+											<tr>
 											<td><p class="rev"><%=mobiles[i].prix%></p></td>
 											<tr>
-											<td><a href="login"><button type="submit" class="contact" >Acheter</button></a></td>
+											<td><input type="submit" class="contact" value="acheter" ></td>
 										</tr>
 											</tr>
+										</form>
 											</table>
 										</div>
 									</li>
@@ -156,7 +163,7 @@ jQuery(document).ready(function($) {
 	<!----//End-slider-script---->
 	
 	
-	<%- include ("../footer") %>
+	<%- include ("./footer") %>
 </body>
 </html>
 

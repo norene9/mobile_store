@@ -9,5 +9,5 @@ module.exports=(sequelize,type)=>{
        userName:type.STRING,
         password:type.STRING,
         
-   })
+   }) 
 } 

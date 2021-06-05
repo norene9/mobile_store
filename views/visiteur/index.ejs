@@ -1,0 +1,180 @@
+<!--A Design by W3layouts
+Author: W3layout
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Mobile Store</title>
+<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="js/jquery-1.11.0.min.js"></script>
+<!-- Custom Theme files -->
+<link href="css/style.css" rel='stylesheet' type='text/css' />
+<script src="js/jquery.easydropdown.js"></script>
+<!-- Custom Theme files -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- Google Fonts -->
+<link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900' rel='stylesheet' type='text/css'>
+<!-- Google Fonts -->
+<script type="text/javascript" src="js/move-top.js"></script>
+<script type="text/javascript" src="js/easing.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	$(".scroll").click(function(event){		
+		event.preventDefault();
+		$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+	});
+});
+</script>
+</head>
+<body>
+	<!-- Header Starts Here -->
+	<div class="header">
+		<div class="container">
+			<div class="logo">
+				<a href="index.html"><img src="images/logo_small.png" alt="" width=250px height=75px;></a>
+			</div>
+			<span class="menu"></span>
+			<div class="m-clear"></div>
+			<div class="navigation">
+				<ul class="navig">
+					<li><a href="#">Home</a></li>
+					<li>
+						<form action="/search" method="POST">
+							<input type="text" placeholder="Search.." name="search" >
+							<button type="submit">Submit</button>
+						  </form>
+						
+						 
+
+					 
+					</li>
+					<li><a href="#feture" class="scroll">features</a></li>
+					<li><a href="#review"  class="active scroll">REviews</a></li>
+					<li><a href="#review"  class="active scroll">Produits</a></li>
+					<li><a href="login" >buy now</a></li>
+					<li><a href="file:///C:/Users/Warda/Desktop/Projet/tnfalloy-web/web/login.html" >Compte</a></li>
+				</ul>
+				<script>
+					$( "span.menu" ).click(function() {
+					  $( ".navigation" ).slideToggle( "slow", function() {
+					    // Animation complete.
+					  });
+					});
+				</script>
+			</div>
+			<div class="clerfix"></div>
+			<div class="banner">
+				<h1></h1>
+				<p></p>
+			<!--	<a href="#">25% off rrp</a> -->
+			</div>
+		</div>
+	</div>
+	<!-- Header Ends Here -->
+	<!-- Save Starts Here -->
+	<div class="save" id="save">
+		<div class="container">
+			<div class="reviews" id="review">
+				<div class="container">
+					<a href="#"><img src="images/logo_small.png" width="160px" height="50px" alt=""></a>
+				</br></br>
+					<div  id="top" class="callbacks_container">
+						  <ul class="rslides" id="slider4">
+							<% for(var i=0;i< mobiles.length;i++){%>
+								<% if (mobiles.length!==0){%>
+									
+									<li>
+								
+										<div class="slider-top">
+											<table>
+												
+											<td><a ><img src="<%=mobiles[i].filepath%>" width="100" height="100"></a></td>
+											<tr> 
+											
+											<td id="<%=i%>"><p><%=mobiles[i].mobile%></p></td>
+											</tr>
+											<tr>
+												<form action="buy"	method="POST">
+												<td><input class="rev" name="id" id="id" value="<%=mobiles[i].id%>"></td>
+												<tr>
+											<tr>
+											<td><p class="rev"><%=mobiles[i].prix%></p></td>
+											<tr>
+											<td><input type="submit" class="contact" value="acheter" ></td>
+										</tr>
+											</tr>
+										</form>
+											</table>
+										</div>
+									</li>
+									
+								
+							<%}%>
+							<%}%>
+						
+						  </ul>
+					</div>
+		
+				</div>
+			</div>
+			<!-- Reviews Ends Here -->
+		</div>
+	</div>
+	<!-- Save Ends Here -->
+	
+	<!-- Reviews Starts Here -->
+		<script>
+		    // You can also use "$(window).load(function() {"
+		    $(function () {
+		      // Slideshow 4
+		      $("#slider1").responsiveSlides({
+		        auto: true,
+		        pager: true,
+		        nav: true,
+		        speed: 500,
+		        namespace: "callbacks",
+		        before: function () {
+		          $('.events').append("<li>before event fired.</li>");
+		        },
+		        after: function () {
+		          $('.events').append("<li>after event fired.</li>");
+		        }
+		      });
+		
+		    });
+		  </script>
+	
+	<script src="js/responsiveslides.min.js"></script>
+			 <script>
+			    // You can also use "$(window).load(function() {"
+			    $(function () {
+			      // Slideshow 4
+			      $("#slider4").responsiveSlides({
+			        auto: true,
+			        pager: true,
+			        nav: true,
+			        speed: 500,
+			        namespace: "callbacks",
+			        before: function () {
+			          $('.events').append("<li>before event fired.</li>");
+			        },
+			        after: function () {
+			          $('.events').append("<li>after event fired.</li>");
+			        }
+			      });
+			
+			    });
+			  </script>
+	<!----//End-slider-script---->
+	
+	
+	<%- include ("../footer") %>
+</body>
+</html>
+
+
