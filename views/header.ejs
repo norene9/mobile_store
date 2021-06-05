@@ -1,0 +1,47 @@
+<div class="header">
+<div class="container">
+    <div class="logo">
+        <a href="index.html"><img src="images/logo_small.png" alt="" width=250px height=75px;></a>
+    </div>
+    <span class="menu"></span>
+    <div class="m-clear"></div>
+    <div class="navigation">
+        <ul class="navig">
+            <li><a href="#">Home</a></li>
+            <li>
+                <form action="/search" method="POST">
+                    <input type="text" placeholder="Search.." name="search" >
+                    <button type="submit">Submit</button>
+                  </form>
+                
+                 
+
+             
+            </li>
+            
+           
+            <li><a href="#review"  class="active scroll">Produits</a></li>
+            <li><a href="login" >buy now</a></li>
+            <li><a href="compte" >Compte</a></li>
+            <li class="nav-item">
+                <a class="nav-link d-block" href="logout">
+                   <b>Logout</b>
+                </a>
+              </li>
+        </ul>
+        <script>
+            $( "span.menu" ).click(function() {
+              $( ".navigation" ).slideToggle( "slow", function() {
+                // Animation complete.
+              });
+            });
+        </script>
+    </div>
+    <div class="clerfix"></div>
+    <div class="banner">
+        <h1></h1>
+        <p></p>
+    <!--	<a href="#">25% off rrp</a> -->
+    </div>
+</div>
+</div>

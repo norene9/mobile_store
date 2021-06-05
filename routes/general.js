@@ -1,16 +1,46 @@
 const multer=require('multer');
+connectFlash = require("connect-flash");
 
 const path = require('path');
 const express=require('express');
 const bcrypt=require('bcrypt');
 const bcryptSalt = 10;
 const router=express.Router();
-
+var generator = require('generate-password');
 var bodyParser=require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 router.use(bodyParser.json())
 //tables
-const{Mobile, Marque,User,Command}=require('../sequlize')
+const{Mobile, Marque,User,Command,TypeUser}=require('../sequlize');
+router.use(connectFlash());
+router.use((req, res, next) => {
+    res.locals.flashMessages = req.flash();
+    next();
+   });
+router.get('/',async function(req,res,next){
+    const salt = bcrypt.genSaltSync(bcryptSalt);
+    var password = generator.generate({
+      length: 10,
+      numbers: true
+  });
+
+    var types= await TypeUser.findAll()
+    var Admin= await User.findAll({where:{Nom:'admin_principale'}})
+    console.log(types)
+    if(types.length==0){
+ await TypeUser.create({type:'Admin'})
+      await TypeUser.create({type:'Client'})
+    }
+    if(Admin.length==0){
+        var password='admin'
+        const hashPass = bcrypt.hashSync(password, salt)
+      User.create({Nom:'admin_principale',Prenom:'admin_principale',
+      Email:'admin@gmail.com',password:hashPass,TypeUserId:1})
+             
+           }
+           res.redirect('login')
+      
+})
 //================login Function=================//
 var loggedin=function(req,res,next){
     
@@ -31,9 +61,81 @@ const storage=multer.diskStorage({
         cb(null,file.fieldname + '-' + Date.now() + path.extname(file.originalname));
     }
 }) 
-//call login route
+//change password
+router.post('/change',async function(req,res,next){
+    try{
+        var user=await User.findOne({where:{id:req.user.id}})
+        const salt = bcrypt.genSaltSync(bcryptSalt);
+        var password=req.body.cpwd;
+        console.log(password);
+        console.log(user.password);
+        
+        if (bcrypt.compareSync(password, user.password)) {
+            const hashPass = bcrypt.hashSync(req.body.npwd, salt)
+            await User.update({password:hashPass},{where:{id:req.user.id}})
+            res.redirect('logout')
+          }else{
+              console.log('incorrecte')
+              res.redirect('compte')
 
-//Init upload
+          }
+    }catch(err){
+        next(err)
+    }
+   
+     
+  })
+
+ //======================Forget password=============//
+ const nodemailer = require("nodemailer");
+ const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'nnours180@gmail.com',
+      pass: 'hichiron9991' // naturally, replace both with your real credentials or an application-specific password
+    }
+  });
+ router.get('/forget_password',async function(req,res,next){
+    res.render('forget_password')
+  })
+  router.post('/forget_password',async function(req,res,next){
+    try{
+     var user= await User.findOne({where:{Email:req.body.email}})
+     console.log(req.body.email)
+     var password = generator.generate({
+       length: 10,
+       numbers: true
+   });
+ 
+   const salt = bcrypt.genSaltSync(bcryptSalt);
+   const hashPass = bcrypt.hashSync(password, salt)
+   await User.update({password:hashPass},{where:{id:user.id}})
+     var email=user.Email
+         const mailOptions = {
+           from: 'nnours180@gmail.com',
+           to: email,
+           subject: 'Forget Pssword',
+           text: 'votre nouveau mot de passe est:'+' '+password
+         };
+         transporter.sendMail(mailOptions, function(error, info){
+           if (error) {
+           console.log(error);
+           } else {
+             console.log('Email sent: ' + info.response);
+           }
+         });
+       
+       req.flash(
+         "error",
+         `Verifier votre email....`
+       );
+       res.redirect('/login')
+    }catch(err){
+ next(err)
+    }
+   
+   
+ })
 //-----------upload resturant's images----------------//
 const upload=multer({
     storage:storage
@@ -42,7 +144,7 @@ const upload=multer({
 router.get('/index',async function(req,res,next){
    try{
     var mobiles=await Mobile.findAll(); 
-    res.render('visiteur/index',{mobiles})
+    res.render('index',{mobiles})
    }catch(err){
     next(err)
    }
@@ -101,7 +203,7 @@ router.get('/login',async function(req,res,next){
        
         console.log(req.user.id)
      var mobiles= await Mobile.findOne({where:{id:req.body.id}})
-     res.render('user/buy',{mobiles})
+     res.render('buy',{mobiles})
     }catch(err){
      next(err)
     }
@@ -142,7 +244,7 @@ router.get('/login',async function(req,res,next){
 
      
  }  )
- router.post("/search",async function(req,res,next){
+ router.post("/search",loggedin,async function(req,res,next){
      try{
         var mobiles=await Mobile.findAll({where:{mobile:req.body.search}})
         res.render("searched",{mobiles})
@@ -152,17 +254,17 @@ router.get('/login',async function(req,res,next){
      
  })
  //Admin routes
- router.get("/add-product",async(req,res)=>{
+ router.get("/add-product",loggedin,async(req,res)=>{
     var marques= await Marque.findAll()
    
      res.render("Admin/add-product",{marques});
  })
- router.get("/accounts",async(req,res)=>{
+ router.get("/accounts",loggedin,async(req,res)=>{
     var users= await User.findAll({where:{id:1}})
      res.render("Admin/accounts",{users});
  })
 
- router.post('/Ajouter',async (req,res,next)=>{
+ router.post('/Ajouter',loggedin,async (req,res,next)=>{
     upload(req,res,async(err)=>{
         if(err){
             res.render('Admin/add-product', {
@@ -185,7 +287,15 @@ router.get('/login',async function(req,res,next){
             }
     })
         })
-router.get('/products',async function(req,res,next){
+        router.get('/compte',loggedin,async function(req,res,next){
+            try{
+                var user =await User.findOne({where:{id:req.user.id}})
+                res.render('compte',{user})
+            }catch(err){
+next(err)
+            }
+        })
+router.get('/products',loggedin,async function(req,res,next){
     try{
         var mobiles= await Mobile.findAll();
         var marques= await Marque.findAll()
