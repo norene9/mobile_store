@@ -1,0 +1,55 @@
+
+<html>
+<head>
+<script>
+function goBack() {
+  window.history.back()
+}
+</script>
+</head>
+<body>
+
+</br></br></br></br></br></br></br></br></br>
+
+<div>
+
+<h3>L'objet recherché est introuvable !  <img src="images/sad.png" width="50px" height="50px" alt=""></h3>
+<u><p onclick="goBack()">Cliquez ici pour retourner à la page d'acceuil </p></u>
+    
+    </div> 
+</body>
+</html>
+<style>
+    html{
+        background-color: #03224C;
+    }
+    h3{
+        color: red;
+    }
+    
+    div {
+        animation-duration: 5s;
+        animation-name: slidein;
+        font-family: "Trebuchet MS", Verdana, sans-serif;
+        color: #03224C;
+        text-align: center;
+			background-color: gold;
+			border: 2px solid black;
+			padding: 1em;
+			margin-bottom: 3em;
+            font-size:2.4rem;
+        
+      }
+      
+      @keyframes slidein {
+        from {
+          margin-left: 100%;
+          width: 300%;
+        }
+      
+        to {
+          margin-left: 0%;
+          width: 100%;
+        }
+      }
+</style>

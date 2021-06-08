@@ -37,7 +37,7 @@
               <div class="card">
                 <div class="card-body">
                   <div class="d-flex flex-column align-items-center text-center">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                    <img src="images/sad.png" alt="Admin" class="rounded-circle" width="150">
                     <div class="mt-3">
                       <h4><%=user.Nom%> <%=user.Prenom%></h4>
                     
@@ -60,25 +60,31 @@
                       <small>Phone</small>
                       
                         <p ><%=user.phone%></p>
-                     
+                       
                       <h2>change pasword</h2>
                       <form action="change" method="POST">
                         <input name="cpwd" id="cpwd" placeholder="current password">
                         <input name="npwd" id="npwd" placeholder="new password">
-                        <input type="submit" value="submit">
+                      </br>
+                        <input type="submit"  value="submit">
                     </form>
+                    <a class="nav-link d-block" href="logout">
+                      <button>Logout</button>
+                   </a>
                      <a></a>
                      
                     </div>
+                   
                   </div>
                 </div>
                
               </div>
 
-
+ 
 
             </div>
           </div>
+          
           <style>
             body{
         margin-top:20px;
@@ -86,9 +92,7 @@
         text-align: left;
         background-color: #e2e8f0;    
     }
-    .main-body {
-        padding: 15px;
-    }
+    
     .card {
         box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
     }
@@ -98,6 +102,8 @@
         display: flex;
         flex-direction: column;
         min-width: 0;
+        width: 100%;
+        
         word-wrap: break-word;
         background-color: #fff;
         background-clip: border-box;
@@ -106,6 +112,7 @@
     }
     
     .card-body {
+      
         flex: 1 1 auto;
         min-height: 1px;
         padding: 1rem;
@@ -133,6 +140,22 @@
     .shadow-none {
         box-shadow: none!important;
     }
+     input[type="submit"]{
+	border: 0px solid #fff;
+	background: url(../images/step-arw.png)no-repeat #75c7e5 69px;
+	color: #fff;
+	text-transform: uppercase;
+	padding: 10px 33px 10px 21px;
+	font-size: 1em;
+	font-weight: 600;
+	border-radius: 8px;
+	-webkit-border-radius:8px;	
+	-moz-border-radius:8px;	
+	-o-border-radius:8px;
+	outline:none;
+}
+
+
         </style>
         </div>
     </div>

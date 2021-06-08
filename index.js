@@ -36,11 +36,29 @@ var options={
     database:'mobile',
    
   }
- 
+  app.use(function(req, res, next){
+    var currentUser = req.user;
+    next();
+  });
+  app.use(session({
+  
+    name: 'sid',
+    resave: false,
+    saveUninitialized: false,
+    secret: 'is a secret',
+    cookie:{
+      maxAge: 1000 * 60 * 60 * 2,
+      sameSite: true,
+      secure: false
+    }
+  }))
+  app.set('trust proxy',1)
+  app.use(passport.session());
 app.set('view engine', 'ejs')
 app.use('/',generalRouter)
 app.get("/index",function(req,res){
     res.sendFile(path.join(__dirname,'views/index.html'));
+
     
     console.log("aidfdj");
 })

@@ -1,9 +1,4 @@
-<!--A Design by W3layouts
-Author: W3layout
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
+
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -35,6 +30,10 @@ jQuery(document).ready(function($) {
 	<!-- Header Starts Here -->
 	<%- include ("./header") %>
 	<!-- Header Ends Here -->
+</br></br>
+	&nbsp&nbsp&nbsp<u><h1> Nos produits disponibles : 
+	</h1></u>
+</br>
 	<!-- Save Starts Here -->
 	<div class="save" id="save">
 		<div class="container">
@@ -55,14 +54,20 @@ jQuery(document).ready(function($) {
 											<td><a ><img src="<%=mobiles[i].filepath%>" width="100" height="100"></a></td>
 											<tr> 
 											
-											<td id="<%=i%>"><p><%=mobiles[i].mobile%></p></td>
+											<td id="<%=i%>"><p>  <%=mobiles[i].mobile%></p></td>
+											
+
 											</tr>
 											<tr>
 												<form action="buy"	method="POST">
 												<td><input class="rev" name="id" id="id" value="<%=mobiles[i].id%>" hidden></td>
 												<tr>
 											<tr>
-											<td><p class="rev"><%=mobiles[i].prix%></p></td>
+
+											<td><p class="rev">Prix : <%=mobiles[i].prix%> € </p></td>
+											</tr><tr>
+											<td><p class="rev">Description : <%=mobiles[i].Description%> go </p></td>
+											</tr>
 											<tr>
 											<td><input type="submit" class="contact" value="acheter" ></td>
 										</tr>

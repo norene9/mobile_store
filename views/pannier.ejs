@@ -34,7 +34,11 @@ jQuery(document).ready(function($) {
 <body>
 	<!-- Header Starts Here -->
 	<%- include ("./header") %>
+
 	<!-- Header Ends Here -->
+	</br>
+	&nbsp<u><h1> Le contenu de votre panier : 
+	</h1></u>
 	<!-- Save Starts Here -->
 	<div class="save" id="save">
 		<div class="container">
@@ -58,13 +62,13 @@ jQuery(document).ready(function($) {
 											<td id="<%=i%>"><p><%=comand[i].Mobile.mobile%></p></td>
 											</tr>
 											<tr>
-												<form action="anuler"	method="POST">
+											
 												<td><input class="rev" name="id" id="id" value="<%=comand[i].id%>" hidden></td>
 												<tr>
 											<tr>
 											<td><p class="rev"><%=comand[i].Mobile.prix%></p></td>
 											<tr>
-											<td><input type="submit" class="contact" value="annuler" ></td>
+											<td><a href="/annuler/<%=comand[i].id%>"><button >annuler</button</a></td>
 										</tr>
 											</tr>
 										</form>

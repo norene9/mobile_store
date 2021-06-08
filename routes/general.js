@@ -38,14 +38,15 @@ router.get('/',async function(req,res,next){
       Email:'admin@gmail.com',password:hashPass,TypeUserId:1})
              
            }
-           res.redirect('login')
+           res.redirect('index')
       
 })
 //================login Function=================//
 var loggedin=function(req,res,next){
     
     if(req.isAuthenticated()){
-        console.log('fdghjkl;kjhgfghjkjhgfdghjhgfdghjhgfdghfdfghjgf')  
+        console.log('fdghjkl;kjhgfghjkjhgfdghjhgfdghjhgfdghfdfghjgf') 
+        
    next()
   
     }else{
@@ -91,8 +92,8 @@ router.post('/change',async function(req,res,next){
  const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'nnours180@gmail.com',
-      pass: 'hichiron9991' // naturally, replace both with your real credentials or an application-specific password
+      user: 'gullyan184@gmail.com',
+      pass: 'WardaghNemmar99@' // naturally, replace both with your real credentials or an application-specific password
     }
   });
  router.get('/forget_password',async function(req,res,next){
@@ -112,7 +113,7 @@ router.post('/change',async function(req,res,next){
    await User.update({password:hashPass},{where:{id:user.id}})
      var email=user.Email
          const mailOptions = {
-           from: 'nnours180@gmail.com',
+           from: 'gullyan184@gmail.com',
            to: email,
            subject: 'Forget Pssword',
            text: 'votre nouveau mot de passe est:'+' '+password
@@ -151,6 +152,16 @@ router.get('/index',async function(req,res,next){
 }
 
 )
+router.get('/uindex',loggedin,async function(req,res,next){
+    try{
+     var mobiles=await Mobile.findAll(); 
+     res.render('uindex',{mobiles})
+    }catch(err){
+     next(err)
+    }
+ }
+ 
+ )
 router.get('/user',function(req,res,next){
     try{
 if(req.user.TypeUserId==1){
@@ -189,6 +200,7 @@ router.get('/login',async function(req,res,next){
  }
  
  );
+
  router.get('/buy',loggedin,async function(req,res,next){
     try{
         res.redirect('back')
@@ -216,7 +228,7 @@ router.get('/login',async function(req,res,next){
      var mobiles= await Mobile.findOne({where:{id:req.body.id}});
      console.log(mobiles.id)
      var command=await Command.create({MobileId:mobiles.id,UserId:req.user.id,booking:req.body.date,quantity:req.body.quantity,Assurance:req.body.assurance})
-     res.redirect('index')
+     res.redirect('/index')
     }catch(err){
      next(err)
     }
@@ -239,20 +251,34 @@ router.get('/login',async function(req,res,next){
         res.redirect('login')
 
         }catch(err){
-            next(err)
+            next(err) 
         }
 
      
  }  )
- router.post("/search",loggedin,async function(req,res,next){
+ router.post("/search",async function(req,res,next){
      try{
         var mobiles=await Mobile.findAll({where:{mobile:req.body.search}})
-        res.render("searched",{mobiles})
+        if(mobiles.length!==0){
+            res.render("searched",{mobiles})
+        }else{
+            res.render("Not_fond") 
+        }
+       
      }catch(err){
          next(err)
      }
      
  })
+ router.get("/search",loggedin,async function(req,res,next){
+    try{
+      
+       res.redirect('back')
+    }catch(err){
+        next(err)
+    }
+    
+})
  //Admin routes
  router.get("/add-product",loggedin,async(req,res)=>{
     var marques= await Marque.findAll()
@@ -277,11 +303,12 @@ router.get('/login',async function(req,res,next){
                     var prix=req.body.prix;
                     var filepath=req.file;
                     var marque=req.body.marque;
+                    var des=req.body.des;
                     var quantitiy=req.body.quantity;
                     ///trouver les marque
                     var marque_trouve= await Marque.findOne({where:{Marque:marque}})
                     //create product
-                    await Mobile.create({mobile:mobiles,prix:prix,filepath:filepath.filename,marqueId:marque.id,quantitiy:quantitiy,MarqueId:marque_trouve.id})
+                    await Mobile.create({mobile:mobiles,prix:prix,filepath:filepath.filename,Description:des,marqueId:marque.id,quantitiy:quantitiy,MarqueId:marque_trouve.id})
                res.redirect("add-product")
                 }catch(err){next(err)}
             }
@@ -376,19 +403,23 @@ router.post('/add_marque',async function(req,res,next){
  }
  
  )
- router.get('/comands',async function(req,res,next){
+ router.get('/comands',loggedin,async function(req,res,next){
  
     
     var comand=await Command.findAll({include:[{model:Mobile},{model:User}]})
     
       res.render('Admin/comands',{comand})
     })
-    router.get('/annuler',async function(req,res,next){
+    router.get('/annuler/:id',async function(req,res,next){
  
-    
-        var comand=await Command.Destroy({where:{id:req.body.id}})
+    try{
+        var comand=await Command.destroy({where:{id:req.params.id}})
         
-          res.redirect('back')
+        res.redirect('back')
+    }catch(err){
+        next(err)
+    }
+       
         })
     router.get('/pannier',loggedin,async function(req,res,next){
  
