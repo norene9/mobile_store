@@ -92,8 +92,8 @@ router.post('/change',async function(req,res,next){
  const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'gullyan184@gmail.com',
-      pass: 'WardaghNemmar99@' // naturally, replace both with your real credentials or an application-specific password
+      user: 'youremail@gmail.com',//put your own email
+      pass: 'your email s password' //put your password NOTE:this thing won't work until you allow it in your security settings of your email 
     }
   });
  router.get('/forget_password',async function(req,res,next){
