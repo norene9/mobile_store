@@ -113,7 +113,7 @@ router.post('/change',async function(req,res,next){
    await User.update({password:hashPass},{where:{id:user.id}})
      var email=user.Email
          const mailOptions = {
-           from: 'gullyan184@gmail.com',
+           from: 'Your Mail',
            to: email,
            subject: 'Forget Pssword',
            text: 'votre nouveau mot de passe est:'+' '+password
